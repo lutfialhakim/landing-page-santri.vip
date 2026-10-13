@@ -1,0 +1,5 @@
+{
+  "port": "3456",
+  "admin_user": "admin",
+  "admin_password": "change_this_password"
+}

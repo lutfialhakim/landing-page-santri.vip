@@ -1,0 +1,184 @@
+{
+  "avatar": "assets/avatar.png",
+  "bio_paragraphs": [
+    "Hey! I'm a \u003cstrong class=\"text-fg whitespace-nowrap\"\u003efull-stack engineer\u003c/strong\u003e focused on developer experience and complex web interfaces. I work \u003cstrong class=\"text-fg whitespace-nowrap\"\u003eremotely\u003c/strong\u003e.",
+    "I help \u003cstrong class=\"text-fg whitespace-nowrap\"\u003estartups and scale-ups\u003c/strong\u003e turn an idea into a solid, polished product. I focus on the \u003cstrong class=\"text-fg whitespace-nowrap\"\u003efront-end\u003c/strong\u003e while also contributing to the \u003cstrong class=\"text-fg whitespace-nowrap\"\u003eback-end\u003c/strong\u003e.",
+    "On the side, I build and maintain \u003cstrong class=\"text-fg whitespace-nowrap\"\u003eopen-source\u003c/strong\u003e projects used by thousands of developers."
+  ],
+  "email": "lutfialhakim16@gmail.com",
+  "experiences": [
+    {
+      "bullets": [
+        {
+          "text": "Built the analytics workspace used daily by 20k+ customers to explore their data."
+        },
+        {
+          "text": "Shipped an AI assistant that answers questions and triggers agentic actions."
+        },
+        {
+          "text": "Improved application and test-suite performance.",
+          "tooltip": "Cut initial load time by 1.4s and CI duration by 25%."
+        },
+        {
+          "text": "Led several structural technical migrations.",
+          "tooltip": "Webpack → Vite, JS → TS, REST → tRPC, adoption of the React Compiler."
+        },
+        {
+          "text": "Owned production deployments and on-call rotations."
+        }
+      ],
+      "company": "Acme",
+      "logo": "assets/logo-acme.png",
+      "period": "2023 - Present, remote",
+      "role": "Senior Product Engineer",
+      "skills": [
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Vitest",
+        "Postgres"
+      ],
+      "sub_period": "2021 - 2023",
+      "sub_role": "Product Engineer",
+      "visible": true
+    },
+    {
+      "bullets": [
+        {
+          "text": "Designed and built the customer portal, replacing a manual onboarding process."
+        },
+        {
+          "text": "Set up the first design system and component documentation."
+        }
+      ],
+      "company": "Globex",
+      "logo": "assets/logo-globex.png",
+      "period": "2019 - 2021",
+      "role": "Front-End Developer",
+      "skills": [
+        "React",
+        "Git",
+        "Figma"
+      ],
+      "visible": true
+    }
+  ],
+  "favicon": "assets/favicon.png",
+  "footer": "© Copyright 2026",
+  "github_url": "https://github.com/lutfialhakim16",
+  "linkedin_url": "https://www.linkedin.com/in/example",
+  "name": "Lutfi Alhakim",
+  "projects": [
+    {
+      "description": "An accessible, unstyled component library for React",
+      "image": "assets/project-orbit.png",
+      "stars": "+400",
+      "title": "orbit-ui",
+      "url": "https://github.com/octocat",
+      "visible": true
+    },
+    {
+      "description": "A keyboard-first task manager for your desktop",
+      "image": "assets/project-taskly.png",
+      "stars": "+1200",
+      "title": "Taskly",
+      "url": "https://github.com/octocat",
+      "visible": true
+    },
+    {
+      "description": "A dashboard for everything happening in your repos",
+      "image": "assets/project-devboard.png",
+      "stars": "+80",
+      "title": "DevBoard",
+      "url": "https://github.com/octocat",
+      "visible": true
+    }
+  ],
+  "role": "Full Stack Santri",
+  "section_icons": {
+    "experience": "fa-solid fa-briefcase",
+    "projects": "fa-solid fa-folder-open",
+    "stack": "fa-solid fa-layer-group"
+  },
+  "show_experience": false,
+  "show_projects": false,
+  "show_stack": true,
+  "social_links": [
+    {
+      "icon": "fa-brands fa-github",
+      "platform": "GitHub",
+      "url": "https://github.com/lutfialhakim16",
+      "visible": true
+    },
+    {
+      "icon": "fa-brands fa-linkedin",
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/example",
+      "visible": true
+    },
+    {
+      "icon": "fa-brands fa-x-twitter",
+      "platform": "X",
+      "url": "https://x.com/lutfialhakim_",
+      "visible": true
+    },
+    {
+      "icon": "fa-brands fa-instagram",
+      "platform": "Instagram",
+      "url": "https://instagram.com/lutfialhakim_",
+      "visible": true
+    }
+  ],
+  "tech_stack": [
+    {
+      "name": "TypeScript",
+      "visible": true
+    },
+    {
+      "name": "React",
+      "visible": true
+    },
+    {
+      "name": "Next.js",
+      "visible": true
+    },
+    {
+      "name": "Node.js",
+      "visible": true
+    },
+    {
+      "custom_svg": "\u003csvg viewBox=\"0 0 256 154\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cpath d=\"M128 0Q76.8 0 64 51.2Q83.2 25.6 108.8 32c9.737 2.434 16.697 9.499 24.401 17.318C145.751 62.057 160.275 76.8 192 76.8q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C174.249 14.743 159.725 0 128 0M64 76.8q-51.2 0-64 51.2q19.2-25.6 44.8-19.2c9.737 2.434 16.697 9.499 24.401 17.318C81.751 138.857 96.275 153.6 128 153.6q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C110.249 91.543 95.725 76.8 64 76.8\" fill=\"#38bdf8\"/\u003e\u003c/svg\u003e",
+      "name": "Tailwind CSS",
+      "visible": true
+    },
+    {
+      "name": "Vitest",
+      "visible": true
+    },
+    {
+      "name": "Hono",
+      "visible": true
+    },
+    {
+      "name": "Postgres",
+      "visible": true
+    },
+    {
+      "name": "Docker",
+      "visible": true
+    },
+    {
+      "name": "Cloudflare",
+      "visible": true
+    },
+    {
+      "name": "Figma",
+      "visible": true
+    },
+    {
+      "name": "Git",
+      "visible": true
+    }
+  ],
+  "x_url": "https://x.com/lutfialhakim_"
+}

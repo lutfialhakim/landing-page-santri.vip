@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html class="inter_2d2f04f-module__VqyuoG__variable newsreader_908c8709-module__RR48ca__variable" lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CMS Studio • Santri VIP</title>
+  <link rel="icon" href="/assets/favicon.png" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Theme Script -->
+  <script>
+    const theme = localStorage.getItem('theme');
+    document.documentElement.classList.toggle('dark', theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches));
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;1,6..72,600&display=swap');
+
+    :root {
+      --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-newsreader: 'Newsreader', ui-serif, Georgia, serif;
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --fg: #292524;
+      --muted: #79716b;
+      --border: rgba(41, 37, 36, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --input-bg: rgba(0, 0, 0, 0.03);
+      --input-focus-bg: #ffffff;
+      --ring-focus: rgba(41, 37, 36, 0.15);
+      --accent: #292524;
+      --accent-fg: #fafaf9;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    .dark {
+      --bg: #1b1918;
+      --surface: #282624;
+      --fg: #f5f5f4;
+      --muted: #a6a09b;
+      --border: rgba(250, 250, 249, 0.12);
+      --card-bg: rgba(40, 38, 36, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.04);
+      --input-focus-bg: #282624;
+      --ring-focus: rgba(250, 250, 249, 0.2);
+      --accent: #f5f5f4;
+      --accent-fg: #1c1917;
+      --success: #10b981;
+      --danger: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* Studio Layout Container */
+    .cms-container {
+      width: 100%;
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 6.5rem 1rem 4rem 1rem;
+    }
+
+    /* Floating Studio Header */
+    .cms-header {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2rem);
+      max-width: 48rem;
+      z-index: 50;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    /* Cards */
+    .cms-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    .cms-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .cms-card-title {
+      font-family: var(--font-newsreader);
+      font-style: italic;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+    }
+
+    .cms-card-desc {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 0.15rem;
+    }
+
+    /* Sub Cards (Item List) */
+    .cms-item-card {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all 0.2s;
+    }
+
+    .cms-item-card:hover {
+      border-color: rgba(120, 120, 120, 0.25);
+    }
+
+    .cms-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      gap: 0.75rem;
+    }
+
+    /* Segmented Navigation Tabs */
+    .cms-tabs-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      overflow-x: auto;
+      max-width: 100%;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      scrollbar-width: none;
+    }
+
+    .cms-tabs-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cms-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 0.875rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .cms-tab-btn:hover {
+      color: var(--fg);
+    }
+
+    .cms-tab-btn.active {
+      background: var(--accent);
+      color: var(--accent-fg);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Inputs & Form Elements */
+    .cms-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      width: 100%;
+    }
+
+    .cms-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding-left: 0.25rem;
+      letter-spacing: 0.01em;
+    }
+
+    .cms-input, .cms-textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 0.55rem 0.85rem;
+      font-size: 0.8125rem;
+      color: var(--fg);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+    }
+
+    .cms-textarea {
+      resize: vertical;
+      min-height: 4.5rem;
+      line-height: 1.45;
+    }
+
+    .cms-input:focus, .cms-textarea:focus {
+      border-color: var(--fg);
+      background-color: var(--input-focus-bg);
+      box-shadow: 0 0 0 3px var(--ring-focus);
+    }
+
+    .cms-rich-editor {
+      width: 100%;
+      min-height: 4.5rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8125rem;
+      color: var(--fg);
+      font-family: inherit;
+      outline: none;
+      line-height: 1.6;
+      transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+    }
+
+    .cms-rich-editor:focus {
+      border-color: var(--fg);
+      background-color: var(--input-focus-bg);
+      box-shadow: 0 0 0 3px var(--ring-focus);
+    }
+
+    .cms-rich-editor strong, .cms-rich-editor b {
+      font-weight: 700;
+      color: var(--fg);
+      background: rgba(120, 120, 120, 0.12);
+      padding: 0.1rem 0.35rem;
+      border-radius: 0.3rem;
+    }
+
+    .cms-rich-editor em, .cms-rich-editor i {
+      font-style: italic;
+    }
+
+    .cms-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .cms-grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Buttons */
+    .cms-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 0.75rem;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .cms-btn:active {
+      transform: scale(0.96);
+    }
+
+    .cms-btn-primary {
+      background: var(--accent);
+      color: var(--accent-fg);
+      border-color: var(--accent);
+    }
+
+    .cms-btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .cms-btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .cms-btn-outline:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+
+    .cms-btn-danger {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .cms-btn-danger:hover {
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.3);
+      background: rgba(239, 68, 68, 0.06);
+    }
+
+    .cms-btn-icon {
+      padding: 0.45rem;
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Toggle Switch (Modern iOS style) */
+    .cms-switch-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cms-switch {
+      position: relative;
+      width: 2.5rem;
+      height: 1.35rem;
+      background: rgba(120, 120, 120, 0.25);
+      border-radius: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    .cms-switch-thumb {
+      position: absolute;
+      top: 0.125rem;
+      left: 0.15rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .cms-switch.active {
+      background: var(--success);
+    }
+
+    .cms-switch.active .cms-switch-thumb {
+      transform: translateX(1.15rem);
+    }
+
+    /* Modal Backdrop */
+    .cms-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .cms-modal-overlay.open {
+      display: flex;
+    }
+
+    .cms-modal-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      width: 100%;
+      max-width: 38rem;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Social Links List */
+    .cms-social-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      transition: all 0.2s ease;
+      flex-wrap: wrap;
+    }
+
+    .cms-social-row.inactive {
+      opacity: 0.55;
+      background: rgba(120, 120, 120, 0.04);
+    }
+
+    /* Tech Stack Grid Cards */
+    .cms-tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+      gap: 1rem;
+    }
+
+    .cms-tech-card {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .cms-tech-card.inactive {
+      opacity: 0.5;
+    }
+
+    .cms-tech-icon-box {
+      width: 2.75rem;
+      height: 2.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 0.4rem;
+    }
+
+    .cms-tech-icon-box svg, .cms-tech-icon-box i {
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Icon Picker Grid & Cards */
+    .cms-icon-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+      gap: 0.5rem;
+      max-height: 250px;
+      overflow-y: auto;
+      padding: 0.25rem;
+    }
+
+    .cms-icon-card {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.35rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .cms-icon-card:hover {
+      border-color: var(--fg);
+      background: var(--surface);
+    }
+
+    .cms-icon-card.selected {
+      border-color: var(--fg);
+      background: var(--surface);
+      box-shadow: 0 0 0 2px var(--fg);
+    }
+
+    .cms-icon-card i {
+      font-size: 1.6rem;
+      color: var(--fg);
+    }
+
+    .cms-icon-card span {
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      padding: 0 0.25rem;
+    }
+
+    /* Media Gallery Grid */
+    .cms-media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+      gap: 0.75rem;
+    }
+
+    .cms-media-card {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.85rem;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+    }
+
+    .cms-media-card:hover {
+      border-color: var(--fg);
+    }
+
+    .cms-media-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem;
+    }
+
+    .cms-media-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Toast Notification */
+    .cms-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--fg);
+      color: var(--bg);
+      padding: 0.65rem 1.25rem;
+      border-radius: 2rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      z-index: 120;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cms-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Frosted Blur Overlay (Same as website) -->
+  <div class="pointer-events-none fixed inset-0 z-40 h-32">
+    <div class="from-bg absolute inset-0 bg-linear-to-b to-transparent"></div>
+    <div class="absolute inset-0 mask-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] backdrop-blur-[1px]"></div>
+    <div class="absolute inset-0 mask-[linear-gradient(to_bottom,black_0%,black_55%,transparent_80%)] backdrop-blur-xs"></div>
+    <div class="absolute inset-0 mask-[linear-gradient(to_bottom,black_0%,black_30%,transparent_55%)] backdrop-blur-sm"></div>
+    <div class="absolute inset-0 mask-[linear-gradient(to_bottom,black_0%,black_12%,transparent_32%)] backdrop-blur-lg"></div>
+  </div>
+
+  <!-- Floating Studio Header Pill -->
+  <header class="cms-header">
+    <div style="display: flex; align-items: center; gap: 0.75rem; padding-left: 0.25rem;">
+      <div style="position: relative;">
+        <img id="dock-avatar" src="/assets/avatar.png" alt="Avatar" style="width: 2.35rem; height: 2.35rem; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);" />
+        <span style="position: absolute; bottom: 0; right: 0; width: 0.65rem; height: 0.65rem; background: var(--success); border-radius: 50%; border: 2px solid var(--surface);"></span>
+      </div>
+      <div style="display: flex; flex-direction: column; line-height: 1.2;">
+        <span id="dock-title" style="font-family: var(--font-newsreader); font-style: italic; font-size: 1.05rem; letter-spacing: -0.02em;">Santri VIP</span>
+        <span style="font-size: 0.68rem; color: var(--muted); font-weight: 500;">Content Studio</span>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 0.45rem;">
+      <button type="button" id="theme-toggle-btn" class="cms-btn cms-btn-outline cms-btn-icon" title="Ganti Tema (Terang / Gelap)">
+        <svg id="theme-icon-sun" class="size-4" style="width: 1rem; height: 1rem; display: none;" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="theme-icon-moon" class="size-4" style="width: 1rem; height: 1rem; display: none;" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <a href="/" target="_blank" class="cms-btn cms-btn-outline" title="Buka website di tab baru">
+        <span>Lihat Web</span>
+        <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+
+      <button type="button" id="save-all-btn" class="cms-btn cms-btn-primary">
+        <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+        <span>Simpan Perubahan</span>
+      </button>
+
+      <button type="button" id="logout-btn" class="cms-btn cms-btn-danger cms-btn-icon" title="Keluar dari Admin">
+        <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l3 3m0 0l-3 3m3-3H3" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="cms-container">
+
+    <!-- Segmented Navigation Tabs -->
+    <nav class="cms-tabs-nav" role="tablist">
+      <button type="button" class="cms-tab-btn active" data-tab="tab-profile">
+        <svg style="width: 0.9rem; height: 0.9rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+        </svg>
+        <span>Profil & Bio</span>
+      </button>
+
+      <button type="button" class="cms-tab-btn" data-tab="tab-experience">
+        <svg style="width: 0.9rem; height: 0.9rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+        </svg>
+        <span>Pengalaman</span>
+      </button>
+
+      <button type="button" class="cms-tab-btn" data-tab="tab-projects">
+        <svg style="width: 0.9rem; height: 0.9rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+        </svg>
+        <span>Proyek</span>
+      </button>
+
+      <button type="button" class="cms-tab-btn" data-tab="tab-stack">
+        <svg style="width: 0.9rem; height: 0.9rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+        </svg>
+        <span>Tech Stack & Ikon</span>
+      </button>
+
+      <button type="button" class="cms-tab-btn" data-tab="tab-media">
+        <svg style="width: 0.9rem; height: 0.9rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg>
+        <span>Galeri Media</span>
+      </button>
+
+      <button type="button" class="cms-tab-btn" data-tab="tab-security">
+        <svg style="width: 0.9rem; height: 0.9rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+        </svg>
+        <span>Keamanan</span>
+      </button>
+    </nav>
+
+    <!-- TAB 1: PROFIL & BIO -->
+    <section id="tab-profile" class="tab-panel" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      
+      <!-- Card Identitas -->
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Identitas Utama</h2>
+            <p class="cms-card-desc">Informasi brand, foto profil, dan ikon tab peramban.</p>
+          </div>
+        </div>
+
+        <div class="cms-grid-2">
+          <!-- Avatar Box -->
+          <div style="background: var(--input-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem; display: flex; align-items: center; gap: 1rem;">
+            <img id="avatar-preview" src="/assets/avatar.png" alt="Avatar" style="width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0;" />
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; width: 100%;">
+              <label class="cms-label">Foto Profil Avatar</label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="field-avatar-path" class="cms-input" readonly />
+                <button type="button" id="change-avatar-btn" class="cms-btn cms-btn-outline" style="flex-shrink: 0;">Pilih</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Favicon Box -->
+          <div style="background: var(--input-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem; display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 3.5rem; height: 3.5rem; border-radius: 0.75rem; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 0.5rem; flex-shrink: 0;">
+              <img id="favicon-preview" src="/assets/favicon.png" alt="Favicon" style="width: 100%; height: 100%; object-fit: contain;" />
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; width: 100%;">
+              <label class="cms-label">Favicon Tab Browser</label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="field-favicon-path" class="cms-input" readonly />
+                <button type="button" id="change-favicon-btn" class="cms-btn cms-btn-outline" style="flex-shrink: 0;">Pilih</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cms-grid-2">
+          <div class="cms-form-group">
+            <label for="field-name" class="cms-label">Nama Lengkap / Brand</label>
+            <input type="text" id="field-name" class="cms-input" placeholder="Your Name" />
+          </div>
+          <div class="cms-form-group">
+            <label for="field-role" class="cms-label">Profesi / Title</label>
+            <input type="text" id="field-role" class="cms-input" placeholder="Full-Stack Engineer" />
+          </div>
+        </div>
+
+        <div class="cms-grid-2">
+          <div class="cms-form-group">
+            <label for="field-email" class="cms-label">Alamat Email (Tombol Salin)</label>
+            <input type="email" id="field-email" class="cms-input" placeholder="hello@example.com" />
+          </div>
+          <div class="cms-form-group">
+            <label for="field-footer" class="cms-label">Teks Hak Cipta (Footer)</label>
+            <input type="text" id="field-footer" class="cms-input" placeholder="© 2026 - All rights reserved, Your Name" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Bio Visual Editor -->
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Paragraf Bio (Hero Section)</h2>
+            <p class="cms-card-desc">Teks pengantar di bagian atas website. Cukup blok kata yang ingin ditebalkan lalu klik tombol <strong>B</strong> (atau tekan <strong>Ctrl+B</strong>). Tidak perlu menulis kode HTML!</p>
+          </div>
+        </div>
+
+        <div class="cms-form-group">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label class="cms-label">Paragraf 1</label>
+            <div style="display: flex; gap: 0.35rem; align-items: center;">
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem; font-weight: 700;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-1', 'bold')" title="Tebalkan teks yang diblok (Ctrl+B)">B</button>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem; font-style: italic;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-1', 'italic')" title="Miringkan teks yang diblok (Ctrl+I)">I</button>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-1', 'removeFormat')" title="Hapus format">Normal</button>
+            </div>
+          </div>
+          <div id="bio-editor-1" contenteditable="true" class="cms-rich-editor" placeholder="Ketik kalimat paragraf 1..."></div>
+        </div>
+
+        <div class="cms-form-group">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label class="cms-label">Paragraf 2</label>
+            <div style="display: flex; gap: 0.35rem; align-items: center;">
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem; font-weight: 700;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-2', 'bold')" title="Tebalkan teks yang diblok (Ctrl+B)">B</button>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem; font-style: italic;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-2', 'italic')" title="Miringkan teks yang diblok (Ctrl+I)">I</button>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-2', 'removeFormat')" title="Hapus format">Normal</button>
+            </div>
+          </div>
+          <div id="bio-editor-2" contenteditable="true" class="cms-rich-editor" placeholder="Ketik kalimat paragraf 2..."></div>
+        </div>
+
+        <div class="cms-form-group">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label class="cms-label">Paragraf 3</label>
+            <div style="display: flex; gap: 0.35rem; align-items: center;">
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem; font-weight: 700;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-3', 'bold')" title="Tebalkan teks yang diblok (Ctrl+B)">B</button>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem; font-style: italic;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-3', 'italic')" title="Miringkan teks yang diblok (Ctrl+I)">I</button>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem;" onmousedown="event.preventDefault()" onclick="formatBioText('bio-editor-3', 'removeFormat')" title="Hapus format">Normal</button>
+            </div>
+          </div>
+          <div id="bio-editor-3" contenteditable="true" class="cms-rich-editor" placeholder="Ketik kalimat paragraf 3..."></div>
+        </div>
+      </div>
+
+      <!-- Card Sosial Media Dinamis -->
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Tautan Media Sosial</h2>
+            <p class="cms-card-desc">Pilih platform media sosial, sesuaikan ikon, tautan URL, dan atur urutan tampilan di hero section.</p>
+          </div>
+          <button type="button" id="add-social-btn" class="cms-btn cms-btn-primary" style="display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-plus"></i>
+            <span>Tambah Media Sosial</span>
+          </button>
+        </div>
+
+        <div id="social-links-container" style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: PENGALAMAN KERJA -->
+    <section id="tab-experience" class="tab-panel" style="display: none; flex-direction: column; gap: 1.5rem;">
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Pengalaman Kerja</h2>
+            <p class="cms-card-desc">Linimasa karir, riwayat pekerjaan, dan pencapaian.</p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <!-- Section Icon Box -->
+            <div style="display: flex; align-items: center; gap: 0.45rem; background: var(--input-bg); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.25rem 0.5rem;">
+              <span style="font-size: 0.7rem; color: var(--muted); font-weight: 600;">Ikon:</span>
+              <div id="section-icon-preview-exp" style="width: 1.6rem; height: 1.6rem; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 0.4rem; font-size: 0.9rem;">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.45rem; font-size: 0.7rem;" onclick="openSectionIconEditor('experience')">Ganti Ikon</button>
+            </div>
+
+            <div class="cms-switch-wrap" id="toggle-section-exp-btn" title="Aktifkan atau sembunyikan seksi ini di web publik">
+              <div class="cms-switch active" id="switch-section-exp">
+                <div class="cms-switch-thumb"></div>
+              </div>
+              <span id="text-section-exp" style="font-size: 0.75rem; font-weight: 600;">Tampil di Web</span>
+            </div>
+
+            <button type="button" id="add-exp-btn" class="cms-btn cms-btn-primary">
+              <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              <span>Tambah Pengalaman</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="experience-cards-container" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: PROYEK -->
+    <section id="tab-projects" class="tab-panel" style="display: none; flex-direction: column; gap: 1.5rem;">
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Karya & Proyek</h2>
+            <p class="cms-card-desc">Koleksi kartu portofolio dan proyek open-source.</p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <!-- Section Icon Box -->
+            <div style="display: flex; align-items: center; gap: 0.45rem; background: var(--input-bg); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.25rem 0.5rem;">
+              <span style="font-size: 0.7rem; color: var(--muted); font-weight: 600;">Ikon:</span>
+              <div id="section-icon-preview-proj" style="width: 1.6rem; height: 1.6rem; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 0.4rem; font-size: 0.9rem;">
+                <i class="fa-solid fa-folder-open"></i>
+              </div>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.45rem; font-size: 0.7rem;" onclick="openSectionIconEditor('projects')">Ganti Ikon</button>
+            </div>
+
+            <div class="cms-switch-wrap" id="toggle-section-proj-btn" title="Aktifkan atau sembunyikan seksi ini di web publik">
+              <div class="cms-switch active" id="switch-section-proj">
+                <div class="cms-switch-thumb"></div>
+              </div>
+              <span id="text-section-proj" style="font-size: 0.75rem; font-weight: 600;">Tampil di Web</span>
+            </div>
+
+            <button type="button" id="add-proj-btn" class="cms-btn cms-btn-primary">
+              <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              <span>Tambah Proyek</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="projects-cards-container" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TECH STACK & EDIT IKON -->
+    <section id="tab-stack" class="tab-panel" style="display: none; flex-direction: column; gap: 1.5rem;">
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Tech Stack & Editor Ikon</h2>
+            <p class="cms-card-desc">Atur ikon dan teknologi pendukung dengan SVG vektor kustom atau Font Awesome.</p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <!-- Section Icon Box -->
+            <div style="display: flex; align-items: center; gap: 0.45rem; background: var(--input-bg); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.25rem 0.5rem;">
+              <span style="font-size: 0.7rem; color: var(--muted); font-weight: 600;">Ikon:</span>
+              <div id="section-icon-preview-stack" style="width: 1.6rem; height: 1.6rem; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 0.4rem; font-size: 0.9rem;">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.2rem 0.45rem; font-size: 0.7rem;" onclick="openSectionIconEditor('stack')">Ganti Ikon</button>
+            </div>
+
+            <div class="cms-switch-wrap" id="toggle-section-stack-btn" title="Aktifkan atau sembunyikan seksi ini di web publik">
+              <div class="cms-switch active" id="switch-section-stack">
+                <div class="cms-switch-thumb"></div>
+              </div>
+              <span id="text-section-stack" style="font-size: 0.75rem; font-weight: 600;">Tampil di Web</span>
+            </div>
+
+            <button type="button" id="add-tech-btn" class="cms-btn cms-btn-primary">
+              <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              <span>Tambah Teknologi</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="tech-stack-editor-container" class="cms-tech-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: GALERI MEDIA -->
+    <section id="tab-media" class="tab-panel" style="display: none; flex-direction: column; gap: 1.5rem;">
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Galeri Berkas Media</h2>
+            <p class="cms-card-desc">Unggah gambar baru atau klik gambar untuk menyalin lokasi aset.</p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <input type="file" id="media-file-input" accept="image/*" style="display: none;" />
+            <button type="button" id="upload-media-btn" class="cms-btn cms-btn-primary">
+              <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+              </svg>
+              <span>Unggah Gambar</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="media-gallery-grid" class="cms-media-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: KEAMANAN -->
+    <section id="tab-security" class="tab-panel" style="display: none; flex-direction: column; gap: 1.5rem;">
+      <div class="cms-card">
+        <div class="cms-card-header">
+          <div>
+            <h2 class="cms-card-title">Kredensial Studio</h2>
+            <p class="cms-card-desc">Perbarui nama pengguna dan kata sandi akses admin VPS.</p>
+          </div>
+        </div>
+
+        <form id="change-password-form" style="display: flex; flex-direction: column; gap: 1rem; max-width: 24rem;">
+          <div class="cms-form-group">
+            <label for="new-username" class="cms-label">Nama Pengguna Baru</label>
+            <input type="text" id="new-username" class="cms-input" placeholder="admin" required />
+          </div>
+
+          <div class="cms-form-group">
+            <label for="new-password" class="cms-label">Kata Sandi Baru</label>
+            <input type="password" id="new-password" class="cms-input" placeholder="Minimal 6 karakter" required />
+          </div>
+
+          <button type="submit" id="save-password-btn" class="cms-btn cms-btn-primary" style="align-self: flex-start; margin-top: 0.5rem;">
+            <span>Simpan Kredensial Baru</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Media Picker -->
+  <div id="media-modal" class="cms-modal-overlay">
+    <div class="cms-modal-content">
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;">
+        <div>
+          <h3 style="font-family: var(--font-newsreader); font-style: italic; font-size: 1.25rem;">Pilih Gambar dari Galeri</h3>
+          <p style="font-size: 0.75rem; color: var(--muted);">Klik salah satu gambar di bawah ini untuk menggunakannya.</p>
+        </div>
+        <button type="button" id="close-modal-btn" class="cms-btn cms-btn-outline cms-btn-icon">
+          <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="modal-gallery-list" class="cms-media-grid" style="max-height: 50vh; overflow-y: auto; padding: 0.5rem 0;">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Font Awesome Icon Picker & SVG Editor -->
+  <div id="icon-modal" class="cms-modal-overlay">
+    <div class="cms-modal-content" style="max-width: 44rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;">
+        <div>
+          <h3 style="font-family: var(--font-newsreader); font-style: italic; font-size: 1.25rem;">Editor & Pemilih Ikon</h3>
+          <p style="font-size: 0.75rem; color: var(--muted);">Pilih dari pustaka Font Awesome atau tempel SVG untuk: <strong id="icon-modal-tech-name" style="color: var(--fg);">Teknologi</strong></p>
+        </div>
+        <button type="button" id="close-icon-modal-btn" class="cms-btn cms-btn-outline cms-btn-icon">
+          <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Preview Header Box -->
+      <div style="display: flex; gap: 1.25rem; align-items: center; background: var(--input-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+          <div id="icon-modal-preview" style="width: 3.75rem; height: 3.75rem; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.5rem; font-size: 2rem;">
+            <!-- Live Preview -->
+          </div>
+          <span style="font-size: 0.65rem; color: var(--muted); font-weight: 600;">Pratinjau</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; width: 100%;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 0.8rem; font-weight: 600;">Ikon yang Dipilih</span>
+            <span id="icon-type-badge" style="font-size: 0.68rem; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 0.15rem 0.6rem; color: var(--fg); font-weight: 600;">Font Awesome</span>
+          </div>
+          <p id="icon-preview-desc" style="font-size: 0.75rem; color: var(--muted); word-break: break-all; font-family: monospace;">fa-brands fa-react</p>
+        </div>
+      </div>
+
+      <!-- Modal Tabs: Font Awesome vs Custom SVG -->
+      <div style="display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+        <button type="button" id="tab-btn-fa" class="cms-btn cms-btn-primary" style="padding: 0.4rem 0.85rem; font-size: 0.75rem;">Pustaka Font Awesome</button>
+        <button type="button" id="tab-btn-svg" class="cms-btn cms-btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.75rem;">Kode SVG Kustom</button>
+      </div>
+
+      <!-- Tab Content: Font Awesome -->
+      <div id="modal-tab-fa-content" style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; gap: 0.5rem;">
+          <input type="text" id="fa-search-input" class="cms-input" placeholder="Cari ikon teknologi (misal: react, python, php, node, docker, database)..." style="font-size: 0.8rem; padding: 0.5rem 0.75rem;" />
+        </div>
+
+        <div id="fa-icon-picker-grid" class="cms-icon-picker-grid">
+          <!-- Populated from fontAwesomeIcons array -->
+        </div>
+
+        <div class="cms-form-group" style="margin-top: 0.25rem;">
+          <label for="custom-fa-class-input" class="cms-label">Atau ketik nama class Font Awesome secara manual:</label>
+          <input type="text" id="custom-fa-class-input" class="cms-input" placeholder="fa-brands fa-vuejs atau fa-solid fa-cloud" style="font-family: monospace; font-size: 0.78rem;" />
+        </div>
+      </div>
+
+      <!-- Tab Content: SVG Code -->
+      <div id="modal-tab-svg-content" style="display: none; flex-direction: column; gap: 0.75rem;">
+        <div class="cms-form-group">
+          <label for="icon-modal-svg-code" class="cms-label">Tempel kode &lt;svg ...&gt; lengkap:</label>
+          <textarea id="icon-modal-svg-code" class="cms-textarea" style="font-family: monospace; font-size: 0.75rem; min-height: 10rem;" placeholder="<svg viewBox='0 0 24 24'>...</svg>"></textarea>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+        <button type="button" onclick="closeIconModal()" class="cms-btn cms-btn-outline">Batal</button>
+        <button type="button" id="save-icon-btn" class="cms-btn cms-btn-primary">Terapkan Ikon</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="toast" class="cms-toast">
+    <svg style="width: 1rem; height: 1rem; color: var(--success);" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+    <span id="toast-msg">Pesan berhasil disimpan.</span>
+  </div>
+
+  <script>
+    let siteData = {};
+    let targetImageFieldCallback = null;
+    let editingTechIndex = -1;
+
+    const availableMedia = [
+      'assets/avatar.png',
+      'assets/favicon.png',
+      'assets/logo-acme.png',
+      'assets/logo-globex.png',
+      'assets/project-orbit.png',
+      'assets/project-taskly.png',
+      'assets/project-devboard.png'
+    ];
+
+    const defaultTechSVGs = {
+      'TypeScript': '<svg viewBox="0 0 256 256"><path d="M20 0h216c11.046 0 20 8.954 20 20v216c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20V20C0 8.954 8.954 0 20 0" fill="#3178c6"/><path d="M150.518 200.475v27.62q6.738 3.453 15.938 5.179T185.849 235q9.934 0 18.874-1.899t15.678-6.257q6.738-4.359 10.669-11.394q3.93-7.033 3.93-17.391q0-7.51-2.246-13.163a30.8 30.8 0 0 0-6.479-10.055q-4.232-4.402-10.149-7.898t-13.347-6.602q-5.442-2.245-9.761-4.359t-7.342-4.316q-3.024-2.2-4.665-4.661t-1.641-5.567q0-2.848 1.468-5.135q1.469-2.288 4.147-3.927t6.565-2.547q3.887-.906 8.638-.906q3.456 0 7.299.518q3.844.517 7.732 1.597a54 54 0 0 1 7.558 2.719a41.7 41.7 0 0 1 6.781 3.797v-25.807q-6.306-2.417-13.778-3.582T198.633 107q-9.847 0-18.658 2.115q-8.811 2.114-15.506 6.602q-6.694 4.49-10.582 11.437Q150 134.102 150 143.769q0 12.342 7.127 21.06t21.638 14.759a292 292 0 0 1 10.625 4.575q4.924 2.244 8.509 4.66t5.658 5.265t2.073 6.474a9.9 9.9 0 0 1-1.296 4.963q-1.295 2.287-3.93 3.97t-6.565 2.632t-9.2.95q-8.983 0-17.794-3.151t-16.327-9.451m-46.036-68.733H140V109H41v22.742h35.345V233h28.137z" fill="#fff"/></svg>',
+      'React': '<svg viewBox="0 0 256 228"><path d="M210.483 73.824a172 172 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171 171 0 0 0-6.375 5.848a156 156 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a171 171 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a146 146 0 0 0 6.921 2.165a168 168 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a146 146 0 0 0 5.342-4.923a168 168 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145 145 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844" fill="#00d8ff"/></svg>',
+      'Node.js': '<svg viewBox="0 0 256 288"><path d="M134.923 1.832c-4.344-2.443-9.502-2.443-13.846 0L6.787 67.801C2.443 70.244 0 74.859 0 79.745v132.208c0 4.887 2.715 9.502 6.787 11.945l114.29 65.968c4.344 2.444 9.502 2.444 13.846 0l114.29-65.968c4.344-2.443 6.787-7.058 6.787-11.945V79.745c0-4.886-2.715-9.501-6.787-11.944z" fill="#41873f"/></svg>',
+      'Tailwind CSS': '<svg viewBox="0 0 256 154" xmlns="http://www.w3.org/2000/svg"><path d="M128 0Q76.8 0 64 51.2Q83.2 25.6 108.8 32c9.737 2.434 16.697 9.499 24.401 17.318C145.751 62.057 160.275 76.8 192 76.8q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C174.249 14.743 159.725 0 128 0M64 76.8q-51.2 0-64 51.2q19.2-25.6 44.8-19.2c9.737 2.434 16.697 9.499 24.401 17.318C81.751 138.857 96.275 153.6 128 153.6q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C110.249 91.543 95.725 76.8 64 76.8" fill="#38bdf8"/></svg>',
+      'Docker': '<svg viewBox="0 0 256 185"><path d="M250.716 70.497c-5.765-4-18.976-5.5-29.304-3.5c-1.2-10-6.725-18.749-16.333-26.499l-5.524-4l-3.844 5.75c-4.803 7.5-7.205 18-6.485 28c.24 3.499 1.441 9.749 5.044 15.249c-3.362 2-10.328 4.5-19.455 4.5H1.155l-.48 2c-1.682 9.999-1.682 41.248 18.014 65.247c14.892 18.249 36.99 27.499 66.053 27.499c62.93 0 109.528-30.25 131.386-84.997c8.647.25 27.142 0 36.51-18.75c.24-.5.72-1.5 2.401-5.249l.961-2zM139.986 0h-26.42v24.999h26.42zm0 29.999h-26.42v24.999h26.42zm-31.225 0h-26.42v24.999h26.42zm-31.225 0H51.115v24.999h26.421zM46.311 59.998H19.89v24.999h26.42zm31.225 0H51.115v24.999h26.421zm31.225 0h-26.42v24.999h26.42zm31.226 0h-26.422v24.999h26.422zm31.225 0H144.79v24.999h26.422z" fill="#2396ed"/></svg>',
+      'Git': '<svg viewBox="0 0 256 256"><path d="M251.172 116.594L139.4 4.828c-6.433-6.437-16.873-6.437-23.314 0l-23.21 23.21l29.443 29.443c6.842-2.312 14.688-.761 20.142 4.693c5.48 5.489 7.02 13.402 4.652 20.266l28.375 28.376c6.865-2.365 14.786-.835 20.269 4.657c7.663 7.66 7.663 20.075 0 27.74c-7.665 7.666-20.08 7.666-27.749 0c-5.764-5.77-7.188-14.235-4.27-21.336l-26.462-26.462l-.003 69.637a19.8 19.8 0 0 1 5.188 3.71c7.663 7.66 7.663 20.076 0 27.747c-7.665 7.662-20.086 7.662-27.74 0c-7.663-7.671-7.663-20.086 0-27.746a19.7 19.7 0 0 1 6.421-4.281V94.196a19.4 19.4 0 0 1-6.421-4.281c-5.806-5.798-7.202-14.317-4.227-21.446L81.47 39.442L4.83 116.077c-6.44 6.443-6.44 16.884 0 23.322l111.774 111.768c6.435 6.438 16.873 6.438 23.316 0l111.251-111.249c6.438-6.44 6.438-16.887 0-23.324" fill="#de4c36"/></svg>'
+    };
+
+    // Notification Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Theme Switcher
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+
+    function syncThemeIcons() {
+      const isDark = document.documentElement.classList.contains('dark');
+      sunIcon.style.display = isDark ? 'block' : 'none';
+      moonIcon.style.display = isDark ? 'none' : 'block';
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      syncThemeIcons();
+    });
+
+    syncThemeIcons();
+
+    // Tab Navigation
+    const tabButtons = document.querySelectorAll('.cms-tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.style.display = 'none');
+
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-tab');
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) {
+          targetPanel.style.display = 'flex';
+        }
+      });
+    });
+
+    // Load initial content
+    async function loadContent() {
+      try {
+        const res = await fetch('/api/content');
+        if (!res.ok) {
+          window.location.href = '/login';
+          return;
+        }
+        siteData = await res.json();
+        hydrateForm();
+
+        // Load active username into security form
+        fetch('/api/credentials')
+          .then(r => r.json())
+          .then(d => {
+            if (d && d.username) {
+              const uInput = document.getElementById('new-username');
+              if (uInput) uInput.value = d.username;
+            }
+          })
+          .catch(() => {});
+      } catch (err) {
+        showToast('Gagal memuat data konten');
+      }
+    }
+
+    function hydrateForm() {
+      // Header Dock
+      if (siteData.name) {
+        document.getElementById('dock-title').textContent = siteData.name;
+      }
+      if (siteData.avatar) {
+        const avatarUrl = '/' + siteData.avatar.replace(/^\//, '');
+        document.getElementById('dock-avatar').src = avatarUrl;
+        document.getElementById('avatar-preview').src = avatarUrl;
+        document.getElementById('field-avatar-path').value = siteData.avatar;
+      }
+      if (siteData.favicon) {
+        document.getElementById('favicon-preview').src = '/' + siteData.favicon.replace(/^\//, '');
+        document.getElementById('field-favicon-path').value = siteData.favicon;
+      }
+
+      // Profile Fields
+      document.getElementById('field-name').value = siteData.name || '';
+      document.getElementById('field-role').value = siteData.role || '';
+      document.getElementById('field-email').value = siteData.email || '';
+      document.getElementById('field-footer').value = siteData.footer || '';
+
+      // Bio Paragraphs (Visual Rich Editor)
+      const bios = siteData.bio_paragraphs || [];
+      const bioEl1 = document.getElementById('bio-editor-1');
+      const bioEl2 = document.getElementById('bio-editor-2');
+      const bioEl3 = document.getElementById('bio-editor-3');
+      if (bioEl1) bioEl1.innerHTML = bios[0] || '';
+      if (bioEl2) bioEl2.innerHTML = bios[1] || '';
+      if (bioEl3) bioEl3.innerHTML = bios[2] || '';
+
+      // Social Links
+      if (!siteData.social_links || !Array.isArray(siteData.social_links) || siteData.social_links.length === 0) {
+        siteData.social_links = [];
+        if (siteData.github_url) siteData.social_links.push({ platform: 'GitHub', url: siteData.github_url, icon: 'fa-brands fa-github', visible: true });
+        if (siteData.linkedin_url) siteData.social_links.push({ platform: 'LinkedIn', url: siteData.linkedin_url, icon: 'fa-brands fa-linkedin', visible: true });
+        if (siteData.x_url) siteData.social_links.push({ platform: 'X', url: siteData.x_url, icon: 'fa-brands fa-x-twitter', visible: true });
+      }
+      renderSocialLinksList();
+
+      // Section Toggles
+      updateSectionToggle('exp', siteData.show_experience !== false);
+      updateSectionToggle('proj', siteData.show_projects !== false);
+      updateSectionToggle('stack', siteData.show_stack !== false);
+
+      // Section Icons
+      if (!siteData.section_icons) {
+        siteData.section_icons = {
+          experience: 'fa-solid fa-briefcase',
+          projects: 'fa-solid fa-folder-open',
+          stack: 'fa-solid fa-layer-group'
+        };
+      }
+      renderSectionIconPreviews();
+
+      // Render Collections
+      renderSocialLinksList();
+      renderExperienceCards();
+      renderProjectsCards();
+      renderTechStackCards();
+      renderMediaGallery();
+    }
+
+    // Section Toggle Component Sync
+    function updateSectionToggle(type, isActive) {
+      const sw = document.getElementById(`switch-section-${type}`);
+      const txt = document.getElementById(`text-section-${type}`);
+      if (isActive) {
+        sw.classList.add('active');
+        txt.textContent = 'Tampil di Web';
+      } else {
+        sw.classList.remove('active');
+        txt.textContent = 'Disembunyikan';
+      }
+    }
+
+    document.getElementById('toggle-section-exp-btn').addEventListener('click', () => {
+      siteData.show_experience = siteData.show_experience === false ? true : false;
+      updateSectionToggle('exp', siteData.show_experience);
+    });
+
+    document.getElementById('toggle-section-proj-btn').addEventListener('click', () => {
+      siteData.show_projects = siteData.show_projects === false ? true : false;
+      updateSectionToggle('proj', siteData.show_projects);
+    });
+
+    document.getElementById('toggle-section-stack-btn').addEventListener('click', () => {
+      siteData.show_stack = siteData.show_stack === false ? true : false;
+      updateSectionToggle('stack', siteData.show_stack);
+    });
+
+    // Render Experience Cards
+    function renderExperienceCards() {
+      const container = document.getElementById('experience-cards-container');
+      container.innerHTML = '';
+
+      if (!siteData.experiences || siteData.experiences.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem;">Belum ada pengalaman kerja. Klik "+ Tambah Pengalaman" di atas.</div>';
+        return;
+      }
+
+      siteData.experiences.forEach((exp, idx) => {
+        const card = document.createElement('div');
+        card.className = 'cms-item-card';
+
+        const isVis = exp.visible !== false;
+
+        card.innerHTML = `
+          <div class="cms-item-header">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="width: 0.5rem; height: 0.5rem; border-radius: 50%; background: ${isVis ? 'var(--success)' : 'var(--muted)'};"></span>
+              <span style="font-weight: 600; font-size: 0.85rem;">${exp.role || 'Jabatan'} di ${exp.company || 'Perusahaan'}</span>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.35rem;">
+              <button type="button" class="cms-btn cms-btn-outline cms-btn-icon" title="Pindah ke Atas" onclick="moveExp(${idx}, -1)">
+                <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6"/></svg>
+              </button>
+              <button type="button" class="cms-btn cms-btn-outline cms-btn-icon" title="Pindah ke Bawah" onclick="moveExp(${idx}, 1)">
+                <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <button type="button" class="cms-btn cms-btn-outline" onclick="toggleExpVis(${idx})">
+                ${isVis ? 'Sembunyi' : 'Tampil'}
+              </button>
+              <button type="button" class="cms-btn cms-btn-danger cms-btn-icon" title="Hapus Pengalaman" onclick="deleteExp(${idx})">
+                <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 6h-15m3 0V4.5A1.5 1.5 0 0 1 9 3h6a1.5 1.5 0 0 1 1.5 1.5V6m2.25 0v13.5a2.25 2.25 0 0 1-2.25 2.25H7.5A2.25 2.25 0 0 1 5.25 19.5V6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="cms-grid-2">
+            <div class="cms-form-group">
+              <label class="cms-label">Jabatan / Role</label>
+              <input type="text" class="cms-input" value="${exp.role || ''}" oninput="siteData.experiences[${idx}].role = this.value" placeholder="Senior Engineer" />
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Perusahaan</label>
+              <input type="text" class="cms-input" value="${exp.company || ''}" oninput="siteData.experiences[${idx}].company = this.value" placeholder="Acme Inc." />
+            </div>
+          </div>
+
+          <div class="cms-grid-2">
+            <div class="cms-form-group">
+              <label class="cms-label">Periode Waktu</label>
+              <input type="text" class="cms-input" value="${exp.period || ''}" oninput="siteData.experiences[${idx}].period = this.value" placeholder="2023 - Present, remote" />
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Logo Perusahaan</label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="exp-logo-${idx}" class="cms-input" value="${exp.logo || ''}" oninput="siteData.experiences[${idx}].logo = this.value" readonly />
+                <button type="button" class="cms-btn cms-btn-outline" style="flex-shrink: 0;" onclick="openMediaPickerFor('exp-logo-${idx}', (val) => siteData.experiences[${idx}].logo = val)">Pilih</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cms-form-group">
+            <label class="cms-label">Keahlian Terkait (Tags dipisahkan dengan koma)</label>
+            <input type="text" class="cms-input" value="${(exp.skills || []).join(', ')}" oninput="siteData.experiences[${idx}].skills = this.value.split(',').map(s=>s.trim()).filter(Boolean)" placeholder="TypeScript, React, Node.js" />
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.toggleExpVis = function(idx) {
+      siteData.experiences[idx].visible = siteData.experiences[idx].visible === false ? true : false;
+      renderExperienceCards();
+    };
+    window.moveExp = function(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= siteData.experiences.length) return;
+      const tmp = siteData.experiences[idx];
+      siteData.experiences[idx] = siteData.experiences[target];
+      siteData.experiences[target] = tmp;
+      renderExperienceCards();
+    };
+    window.deleteExp = function(idx) {
+      siteData.experiences.splice(idx, 1);
+      renderExperienceCards();
+    };
+
+    document.getElementById('add-exp-btn').addEventListener('click', () => {
+      if (!siteData.experiences) siteData.experiences = [];
+      siteData.experiences.unshift({
+        visible: true,
+        role: 'Senior Software Engineer',
+        company: 'Perusahaan Baru',
+        period: '2024 - Sekarang, remote',
+        logo: 'assets/logo-acme.png',
+        skills: ['TypeScript', 'React', 'Go']
+      });
+      renderExperienceCards();
+      showToast('Pengalaman baru ditambahkan');
+    });
+
+    // Render Projects Cards
+    function renderProjectsCards() {
+      const container = document.getElementById('projects-cards-container');
+      container.innerHTML = '';
+
+      if (!siteData.projects || siteData.projects.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem;">Belum ada proyek. Klik "+ Tambah Proyek" di atas.</div>';
+        return;
+      }
+
+      siteData.projects.forEach((proj, idx) => {
+        const card = document.createElement('div');
+        card.className = 'cms-item-card';
+
+        const isVis = proj.visible !== false;
+
+        card.innerHTML = `
+          <div class="cms-item-header">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="width: 0.5rem; height: 0.5rem; border-radius: 50%; background: ${isVis ? 'var(--success)' : 'var(--muted)'};"></span>
+              <span style="font-weight: 600; font-size: 0.85rem;">${proj.title || 'Judul Proyek'}</span>
+              ${proj.stars ? `<span style="font-size: 0.72rem; color: #eab308; font-weight: 600;">★ ${proj.stars}</span>` : ''}
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.35rem;">
+              <button type="button" class="cms-btn cms-btn-outline cms-btn-icon" title="Pindah ke Atas" onclick="moveProj(${idx}, -1)">
+                <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6"/></svg>
+              </button>
+              <button type="button" class="cms-btn cms-btn-outline cms-btn-icon" title="Pindah ke Bawah" onclick="moveProj(${idx}, 1)">
+                <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <button type="button" class="cms-btn cms-btn-outline" onclick="toggleProjVis(${idx})">
+                ${isVis ? 'Sembunyi' : 'Tampil'}
+              </button>
+              <button type="button" class="cms-btn cms-btn-danger cms-btn-icon" title="Hapus Proyek" onclick="deleteProj(${idx})">
+                <svg style="width: 0.85rem; height: 0.85rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 6h-15m3 0V4.5A1.5 1.5 0 0 1 9 3h6a1.5 1.5 0 0 1 1.5 1.5V6m2.25 0v13.5a2.25 2.25 0 0 1-2.25 2.25H7.5A2.25 2.25 0 0 1 5.25 19.5V6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="cms-grid-2">
+            <div class="cms-form-group">
+              <label class="cms-label">Judul Proyek</label>
+              <input type="text" class="cms-input" value="${proj.title || ''}" oninput="siteData.projects[${idx}].title = this.value" placeholder="Orbit" />
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Badge Stars (contoh: +1.2k)</label>
+              <input type="text" class="cms-input" value="${proj.stars || ''}" oninput="siteData.projects[${idx}].stars = this.value" placeholder="+1.2k" />
+            </div>
+          </div>
+
+          <div class="cms-grid-2">
+            <div class="cms-form-group">
+              <label class="cms-label">URL Tautan / Demo</label>
+              <input type="url" class="cms-input" value="${proj.url || ''}" oninput="siteData.projects[${idx}].url = this.value" placeholder="https://..." />
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Gambar Thumbnail</label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="proj-img-${idx}" class="cms-input" value="${proj.image || ''}" oninput="siteData.projects[${idx}].image = this.value" readonly />
+                <button type="button" class="cms-btn cms-btn-outline" style="flex-shrink: 0;" onclick="openMediaPickerFor('proj-img-${idx}', (val) => siteData.projects[${idx}].image = val)">Pilih</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cms-form-group">
+            <label class="cms-label">Deskripsi Singkat</label>
+            <textarea class="cms-textarea" style="min-height: 3.5rem;" oninput="siteData.projects[${idx}].description = this.value">${proj.description || ''}</textarea>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.toggleProjVis = function(idx) {
+      siteData.projects[idx].visible = siteData.projects[idx].visible === false ? true : false;
+      renderProjectsCards();
+    };
+    window.moveProj = function(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= siteData.projects.length) return;
+      const tmp = siteData.projects[idx];
+      siteData.projects[idx] = siteData.projects[target];
+      siteData.projects[target] = tmp;
+      renderProjectsCards();
+    };
+    window.deleteProj = function(idx) {
+      siteData.projects.splice(idx, 1);
+      renderProjectsCards();
+    };
+
+    document.getElementById('add-proj-btn').addEventListener('click', () => {
+      if (!siteData.projects) siteData.projects = [];
+      siteData.projects.unshift({
+        visible: true,
+        title: 'Proyek Baru',
+        stars: '+100',
+        image: 'assets/project-orbit.png',
+        description: 'Deskripsi ringkas proyek yang dibuat...',
+        url: 'https://github.com'
+      });
+      renderProjectsCards();
+      showToast('Proyek baru ditambahkan');
+    });
+
+    // Platform Presets for Social Links
+    const socialPlatformPresets = [
+      { name: 'GitHub', label: 'GitHub', icon: 'fa-brands fa-github', placeholder: 'https://github.com/username' },
+      { name: 'LinkedIn', label: 'LinkedIn', icon: 'fa-brands fa-linkedin', placeholder: 'https://linkedin.com/in/username' },
+      { name: 'X', label: 'X (Twitter)', icon: 'fa-brands fa-x-twitter', placeholder: 'https://x.com/username' },
+      { name: 'Instagram', label: 'Instagram', icon: 'fa-brands fa-instagram', placeholder: 'https://instagram.com/username' },
+      { name: 'YouTube', label: 'YouTube', icon: 'fa-brands fa-youtube', placeholder: 'https://youtube.com/@channel' },
+      { name: 'TikTok', label: 'TikTok', icon: 'fa-brands fa-tiktok', placeholder: 'https://tiktok.com/@username' },
+      { name: 'Telegram', label: 'Telegram', icon: 'fa-brands fa-telegram', placeholder: 'https://t.me/username' },
+      { name: 'WhatsApp', label: 'WhatsApp', icon: 'fa-brands fa-whatsapp', placeholder: 'https://wa.me/628123456789' },
+      { name: 'Discord', label: 'Discord', icon: 'fa-brands fa-discord', placeholder: 'https://discord.gg/invite' },
+      { name: 'Facebook', label: 'Facebook', icon: 'fa-brands fa-facebook', placeholder: 'https://facebook.com/username' },
+      { name: 'Threads', label: 'Threads', icon: 'fa-brands fa-threads', placeholder: 'https://threads.net/@username' },
+      { name: 'Medium', label: 'Medium', icon: 'fa-brands fa-medium', placeholder: 'https://medium.com/@username' },
+      { name: 'Dribbble', label: 'Dribbble', icon: 'fa-brands fa-dribbble', placeholder: 'https://dribbble.com/username' },
+      { name: 'Behance', label: 'Behance', icon: 'fa-brands fa-behance', placeholder: 'https://behance.net/username' },
+      { name: 'Twitch', label: 'Twitch', icon: 'fa-brands fa-twitch', placeholder: 'https://twitch.tv/username' },
+      { name: 'Reddit', label: 'Reddit', icon: 'fa-brands fa-reddit', placeholder: 'https://reddit.com/user/username' },
+      { name: 'Spotify', label: 'Spotify', icon: 'fa-brands fa-spotify', placeholder: 'https://open.spotify.com/artist/...' },
+      { name: 'Email', label: 'Email', icon: 'fa-solid fa-envelope', placeholder: 'mailto:name@example.com' },
+      { name: 'Website', label: 'Website Pribadi', icon: 'fa-solid fa-globe', placeholder: 'https://example.com' },
+      { name: 'Custom', label: 'Kustom / Lainnya', icon: 'fa-solid fa-link', placeholder: 'https://...' }
+    ];
+
+    function renderSocialLinksList() {
+      const container = document.getElementById('social-links-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (!siteData.social_links || !Array.isArray(siteData.social_links)) {
+        siteData.social_links = [];
+      }
+
+      if (siteData.social_links.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 1.75rem; color: var(--muted); font-size: 0.8rem;">Belum ada tautan media sosial. Klik "+ Tambah Media Sosial" di atas.</div>';
+        return;
+      }
+
+      siteData.social_links.forEach((item, idx) => {
+        const row = document.createElement('div');
+        const isVis = item.visible !== false;
+        row.className = `cms-social-row ${isVis ? '' : 'inactive'}`;
+
+        const iconVal = (item.icon || '').trim();
+        let iconMarkup = '';
+        if (iconVal.startsWith('fa-')) {
+          iconMarkup = `<i class="${iconVal}"></i>`;
+        } else if (iconVal.includes('<svg')) {
+          iconMarkup = iconVal;
+        } else {
+          iconMarkup = `<i class="fa-solid fa-link"></i>`;
+        }
+
+        const currentPlatform = item.platform || 'Custom';
+        const isKnownPreset = socialPlatformPresets.some(p => p.name.toLowerCase() === currentPlatform.toLowerCase());
+
+        let optionsHtml = socialPlatformPresets.map(preset => {
+          const selected = preset.name.toLowerCase() === currentPlatform.toLowerCase() ? 'selected' : '';
+          return `<option value="${preset.name}" ${selected}>${preset.label || preset.name}</option>`;
+        }).join('');
+
+        if (!isKnownPreset && currentPlatform) {
+          optionsHtml = `<option value="${currentPlatform}" selected>${currentPlatform}</option>` + optionsHtml;
+        }
+
+        const presetObj = socialPlatformPresets.find(p => p.name.toLowerCase() === currentPlatform.toLowerCase());
+        const placeholder = presetObj ? presetObj.placeholder : 'https://...';
+
+        row.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+            <div class="cms-tech-icon-box" style="width: 2.5rem; height: 2.5rem; cursor: pointer;" onclick="openSocialIconEditor(${idx})" title="Klik untuk mengganti ikon">
+              ${iconMarkup}
+            </div>
+            <button type="button" class="cms-btn cms-btn-outline" style="font-size: 0.72rem; padding: 0.35rem 0.6rem; display: flex; align-items: center; gap: 0.35rem;" onclick="openSocialIconEditor(${idx})">
+              <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 0.75rem;"></i>
+              <span>Ikon</span>
+            </button>
+          </div>
+
+          <div style="flex-shrink: 0; min-width: 140px;">
+            <select class="cms-input" style="font-size: 0.8rem; padding: 0.45rem 0.65rem; font-weight: 500;" onchange="onSocialPlatformChange(${idx}, this.value)">
+              ${optionsHtml}
+            </select>
+          </div>
+
+          <div style="flex: 1; min-width: 200px;">
+            <input type="url" class="cms-input" style="font-size: 0.8rem; padding: 0.45rem 0.75rem;" value="${item.url || ''}" oninput="siteData.social_links[${idx}].url = this.value" placeholder="${placeholder}" />
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0;">
+            <button type="button" class="cms-btn cms-btn-outline cms-btn-icon" style="width: 1.85rem; height: 1.85rem;" title="Pindah ke Atas" onclick="moveSocial(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+              <svg style="width: 0.75rem; height: 0.75rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6"/></svg>
+            </button>
+            <button type="button" class="cms-btn cms-btn-outline cms-btn-icon" style="width: 1.85rem; height: 1.85rem;" title="Pindah ke Bawah" onclick="moveSocial(${idx}, 1)" ${idx === siteData.social_links.length - 1 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''}>
+              <svg style="width: 0.75rem; height: 0.75rem;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <button type="button" class="cms-btn cms-btn-outline" style="font-size: 0.72rem; padding: 0.35rem 0.65rem;" onclick="toggleSocialVis(${idx})">
+              ${isVis ? 'Aktif' : 'Nonaktif'}
+            </button>
+            <button type="button" class="cms-btn cms-btn-danger cms-btn-icon" style="width: 1.85rem; height: 1.85rem;" title="Hapus" onclick="deleteSocial(${idx})">
+              <svg style="width: 0.75rem; height: 0.75rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    window.onSocialPlatformChange = function(idx, newPlatform) {
+      const item = siteData.social_links[idx];
+      item.platform = newPlatform;
+      const preset = socialPlatformPresets.find(p => p.name.toLowerCase() === newPlatform.toLowerCase());
+      if (preset) {
+        item.icon = preset.icon;
+      }
+      renderSocialLinksList();
+    };
+
+    window.moveSocial = function(idx, delta) {
+      const target = idx + delta;
+      if (target < 0 || target >= siteData.social_links.length) return;
+      const tmp = siteData.social_links[idx];
+      siteData.social_links[idx] = siteData.social_links[target];
+      siteData.social_links[target] = tmp;
+      renderSocialLinksList();
+    };
+
+    window.toggleSocialVis = function(idx) {
+      siteData.social_links[idx].visible = siteData.social_links[idx].visible === false ? true : false;
+      renderSocialLinksList();
+    };
+
+    window.deleteSocial = function(idx) {
+      siteData.social_links.splice(idx, 1);
+      renderSocialLinksList();
+    };
+
+    window.openSocialIconEditor = function(idx) {
+      iconModalTarget = { type: 'social', idx: idx, sectionKey: '' };
+      const item = siteData.social_links[idx];
+      document.getElementById('icon-modal-tech-name').textContent = item.platform || 'Media Sosial';
+
+      const iconVal = (item.icon || 'fa-solid fa-link').trim();
+      if (iconVal.startsWith('fa-')) {
+        currentSelectedIconType = 'fa';
+        currentSelectedIconVal = iconVal;
+        modalTabFaBtn.click();
+      } else {
+        currentSelectedIconType = 'svg';
+        currentSelectedIconVal = iconVal;
+        modalTabSvgBtn.click();
+      }
+
+      document.getElementById('custom-fa-class-input').value = currentSelectedIconType === 'fa' ? currentSelectedIconVal : '';
+      document.getElementById('icon-modal-svg-code').value = currentSelectedIconType === 'svg' ? currentSelectedIconVal : '';
+      document.getElementById('fa-search-input').value = '';
+
+      renderFontAwesomeGrid();
+      updateIconModalPreview();
+      document.getElementById('icon-modal').classList.add('open');
+    };
+
+    document.getElementById('add-social-btn').addEventListener('click', () => {
+      if (!siteData.social_links) siteData.social_links = [];
+      siteData.social_links.push({
+        platform: 'GitHub',
+        url: 'https://github.com/',
+        icon: 'fa-brands fa-github',
+        visible: true
+      });
+      renderSocialLinksList();
+      showToast('Tautan media sosial baru ditambahkan');
+    });
+
+    // Curated Font Awesome Icons Catalog
+    const fontAwesomeIcons = [
+      { name: 'JavaScript', cls: 'fa-brands fa-js' },
+      { name: 'TypeScript', cls: 'fa-solid fa-code' },
+      { name: 'React', cls: 'fa-brands fa-react' },
+      { name: 'Vue.js', cls: 'fa-brands fa-vuejs' },
+      { name: 'Angular', cls: 'fa-brands fa-angular' },
+      { name: 'Node.js', cls: 'fa-brands fa-node-js' },
+      { name: 'Python', cls: 'fa-brands fa-python' },
+      { name: 'PHP', cls: 'fa-brands fa-php' },
+      { name: 'Laravel', cls: 'fa-brands fa-laravel' },
+      { name: 'Golang', cls: 'fa-brands fa-golang' },
+      { name: 'Rust', cls: 'fa-brands fa-rust' },
+      { name: 'Java', cls: 'fa-brands fa-java' },
+      { name: 'HTML5', cls: 'fa-brands fa-html5' },
+      { name: 'CSS3', cls: 'fa-brands fa-css3-alt' },
+      { name: 'Sass / SCSS', cls: 'fa-brands fa-sass' },
+      { name: 'Bootstrap', cls: 'fa-brands fa-bootstrap' },
+      { name: 'Docker', cls: 'fa-brands fa-docker' },
+      { name: 'Git', cls: 'fa-brands fa-git-alt' },
+      { name: 'GitHub', cls: 'fa-brands fa-github' },
+      { name: 'GitLab', cls: 'fa-brands fa-gitlab' },
+      { name: 'Linux', cls: 'fa-brands fa-linux' },
+      { name: 'Ubuntu', cls: 'fa-brands fa-ubuntu' },
+      { name: 'AWS', cls: 'fa-brands fa-aws' },
+      { name: 'Cloudflare', cls: 'fa-brands fa-cloudflare' },
+      { name: 'Figma', cls: 'fa-brands fa-figma' },
+      { name: 'WordPress', cls: 'fa-brands fa-wordpress' },
+      { name: 'NPM', cls: 'fa-brands fa-npm' },
+      { name: 'Yarn', cls: 'fa-brands fa-yarn' },
+      { name: 'Swift', cls: 'fa-brands fa-swift' },
+      { name: 'Android', cls: 'fa-brands fa-android' },
+      { name: 'Apple / iOS', cls: 'fa-brands fa-apple' },
+      { name: 'Database / SQL', cls: 'fa-solid fa-database' },
+      { name: 'Server / Backend', cls: 'fa-solid fa-server' },
+      { name: 'Terminal / CLI', cls: 'fa-solid fa-terminal' },
+      { name: 'Cloud Service', cls: 'fa-solid fa-cloud' },
+      { name: 'API / Network', cls: 'fa-solid fa-network-wired' },
+      { name: 'Keamanan / Auth', cls: 'fa-solid fa-shield-halved' },
+      { name: 'Testing / QA', cls: 'fa-solid fa-bug' },
+      { name: 'Unit Testing', cls: 'fa-solid fa-vial' },
+      { name: 'Performa Cepat', cls: 'fa-solid fa-bolt' },
+      { name: 'AI / Machine Learning', cls: 'fa-solid fa-brain' },
+      { name: 'Robot / Otomasi', cls: 'fa-solid fa-robot' },
+      { name: 'Design System', cls: 'fa-solid fa-layer-group' },
+      { name: 'Styling & Warna', cls: 'fa-solid fa-palette' },
+      { name: 'Global Web', cls: 'fa-solid fa-globe' },
+      { name: 'Deployment CI/CD', cls: 'fa-solid fa-rocket' },
+      { name: 'Microservices', cls: 'fa-solid fa-cubes' },
+      { name: 'Tailwind CSS', cls: 'fa-solid fa-wind' },
+      { name: 'Instagram', cls: 'fa-brands fa-instagram' },
+      { name: 'YouTube', cls: 'fa-brands fa-youtube' },
+      { name: 'TikTok', cls: 'fa-brands fa-tiktok' },
+      { name: 'Telegram', cls: 'fa-brands fa-telegram' },
+      { name: 'WhatsApp', cls: 'fa-brands fa-whatsapp' },
+      { name: 'Discord', cls: 'fa-brands fa-discord' },
+      { name: 'Facebook', cls: 'fa-brands fa-facebook' },
+      { name: 'X / Twitter', cls: 'fa-brands fa-x-twitter' },
+      { name: 'Threads', cls: 'fa-brands fa-threads' },
+      { name: 'LinkedIn', cls: 'fa-brands fa-linkedin' },
+      { name: 'Medium', cls: 'fa-brands fa-medium' },
+      { name: 'Dribbble', cls: 'fa-brands fa-dribbble' },
+      { name: 'Behance', cls: 'fa-brands fa-behance' },
+      { name: 'Reddit', cls: 'fa-brands fa-reddit' },
+      { name: 'Spotify', cls: 'fa-brands fa-spotify' },
+      { name: 'Tautan / Link', cls: 'fa-solid fa-link' },
+      { name: 'Email / Surat', cls: 'fa-solid fa-envelope' },
+      { name: 'Mobile Screen', cls: 'fa-solid fa-mobile-screen' },
+      { name: 'Laptop Dev', cls: 'fa-solid fa-laptop-code' }
+    ];
+
+    let currentSelectedIconType = 'fa';
+    let currentSelectedIconVal = 'fa-solid fa-code';
+
+    // Render Tech Stack Cards
+    function renderTechStackCards() {
+      const container = document.getElementById('tech-stack-editor-container');
+      container.innerHTML = '';
+
+      if (!siteData.tech_stack) siteData.tech_stack = [];
+
+      siteData.tech_stack.forEach((tech, idx) => {
+        const card = document.createElement('div');
+        const isVis = tech.visible !== false;
+
+        const faClass = tech.icon_class || (tech.custom_svg && tech.custom_svg.startsWith('fa-') ? tech.custom_svg : '');
+        let iconMarkup = '';
+
+        if (faClass) {
+          iconMarkup = `<i class="${faClass}"></i>`;
+        } else if (tech.custom_svg && tech.custom_svg.trim().includes('<svg')) {
+          iconMarkup = tech.custom_svg;
+        } else if (defaultTechSVGs[tech.name]) {
+          iconMarkup = defaultTechSVGs[tech.name];
+        } else {
+          iconMarkup = '<i class="fa-solid fa-code"></i>';
+        }
+
+        card.className = `cms-tech-card ${isVis ? '' : 'inactive'}`;
+        card.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="cms-tech-icon-box">
+              ${iconMarkup}
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.35rem;">
+              <button type="button" class="cms-btn cms-btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.7rem;" onclick="toggleTechVis(${idx})">
+                ${isVis ? 'Aktif' : 'Nonaktif'}
+              </button>
+              <button type="button" class="cms-btn cms-btn-danger cms-btn-icon" style="width: 1.6rem; height: 1.6rem;" title="Hapus" onclick="deleteTech(${idx})">
+                <svg style="width: 0.75rem; height: 0.75rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <input type="text" class="cms-input" style="font-weight: 600; padding: 0.4rem 0.6rem; font-size: 0.75rem;" value="${tech.name || ''}" oninput="siteData.tech_stack[${idx}].name = this.value" placeholder="Nama Teknologi" />
+            <button type="button" class="cms-btn cms-btn-outline" style="width: 100%; font-size: 0.72rem; padding: 0.35rem; display: flex; align-items: center; justify-content: center; gap: 0.35rem;" onclick="openIconEditor(${idx})">
+              <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 0.75rem;"></i>
+              <span>Ganti / Edit Ikon</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.toggleTechVis = function(idx) {
+      siteData.tech_stack[idx].visible = siteData.tech_stack[idx].visible === false ? true : false;
+      renderTechStackCards();
+    };
+    window.deleteTech = function(idx) {
+      siteData.tech_stack.splice(idx, 1);
+      renderTechStackCards();
+    };
+
+    document.getElementById('add-tech-btn').addEventListener('click', () => {
+      if (!siteData.tech_stack) siteData.tech_stack = [];
+      siteData.tech_stack.push({
+        name: 'Teknologi Baru',
+        visible: true,
+        icon_class: 'fa-solid fa-code',
+        custom_svg: 'fa-solid fa-code'
+      });
+      renderTechStackCards();
+      showToast('Teknologi baru ditambahkan');
+    });
+
+    // Icon Modal Tab Switching
+    const modalTabFaBtn = document.getElementById('tab-btn-fa');
+    const modalTabSvgBtn = document.getElementById('tab-btn-svg');
+    const modalTabFaContent = document.getElementById('modal-tab-fa-content');
+    const modalTabSvgContent = document.getElementById('modal-tab-svg-content');
+
+    modalTabFaBtn.addEventListener('click', () => {
+      modalTabFaBtn.className = 'cms-btn cms-btn-primary';
+      modalTabSvgBtn.className = 'cms-btn cms-btn-outline';
+      modalTabFaContent.style.display = 'flex';
+      modalTabSvgContent.style.display = 'none';
+      currentSelectedIconType = 'fa';
+      updateIconModalPreview();
+    });
+
+    modalTabSvgBtn.addEventListener('click', () => {
+      modalTabSvgBtn.className = 'cms-btn cms-btn-primary';
+      modalTabFaBtn.className = 'cms-btn cms-btn-outline';
+      modalTabSvgContent.style.display = 'flex';
+      modalTabFaContent.style.display = 'none';
+      currentSelectedIconType = 'svg';
+      updateIconModalPreview();
+    });
+
+    // Update Live Preview in Modal
+    function updateIconModalPreview() {
+      const previewBox = document.getElementById('icon-modal-preview');
+      const badge = document.getElementById('icon-type-badge');
+      const desc = document.getElementById('icon-preview-desc');
+
+      if (currentSelectedIconType === 'fa') {
+        badge.textContent = 'Font Awesome';
+        desc.textContent = currentSelectedIconVal || 'Belum dipilih';
+        previewBox.innerHTML = `<i class="${currentSelectedIconVal || 'fa-solid fa-code'}" style="font-size: 2rem;"></i>`;
+      } else {
+        badge.textContent = 'Vektor SVG';
+        desc.textContent = 'Kode SVG Kustom';
+        previewBox.innerHTML = currentSelectedIconVal && currentSelectedIconVal.includes('<svg') ? currentSelectedIconVal : '<i class="fa-solid fa-code" style="font-size: 2rem;"></i>';
+      }
+    }
+
+    // Render Font Awesome Icon Grid in Modal
+    function renderFontAwesomeGrid(filter = '') {
+      const grid = document.getElementById('fa-icon-picker-grid');
+      grid.innerHTML = '';
+
+      const query = filter.trim().toLowerCase();
+      const filtered = fontAwesomeIcons.filter(item => {
+        return !query || item.name.toLowerCase().includes(query) || item.cls.toLowerCase().includes(query);
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 1.5rem; color: var(--muted); font-size: 0.75rem;">Ikon tidak ditemukan. Anda dapat mengetikkan nama class di bawah.</div>';
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        const isSelected = currentSelectedIconType === 'fa' && currentSelectedIconVal === item.cls;
+        card.className = `cms-icon-card ${isSelected ? 'selected' : ''}`;
+        card.innerHTML = `
+          <i class="${item.cls}"></i>
+          <span>${item.name}</span>
+        `;
+        card.addEventListener('click', () => {
+          currentSelectedIconType = 'fa';
+          currentSelectedIconVal = item.cls;
+          document.getElementById('custom-fa-class-input').value = item.cls;
+          renderFontAwesomeGrid(document.getElementById('fa-search-input').value);
+          updateIconModalPreview();
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('fa-search-input').addEventListener('input', (e) => {
+      renderFontAwesomeGrid(e.target.value);
+    });
+
+    document.getElementById('custom-fa-class-input').addEventListener('input', (e) => {
+      currentSelectedIconType = 'fa';
+      currentSelectedIconVal = e.target.value.trim();
+      renderFontAwesomeGrid(document.getElementById('fa-search-input').value);
+      updateIconModalPreview();
+    });
+
+    document.getElementById('icon-modal-svg-code').addEventListener('input', (e) => {
+      currentSelectedIconType = 'svg';
+      currentSelectedIconVal = e.target.value.trim();
+      updateIconModalPreview();
+    });
+
+    let iconModalTarget = { type: 'tech', idx: -1, sectionKey: '' };
+
+    function renderSectionIconPreviews() {
+      if (!siteData.section_icons) {
+        siteData.section_icons = {
+          experience: 'fa-solid fa-briefcase',
+          projects: 'fa-solid fa-folder-open',
+          stack: 'fa-solid fa-layer-group'
+        };
+      }
+      const expPreview = document.getElementById('section-icon-preview-exp');
+      const projPreview = document.getElementById('section-icon-preview-proj');
+      const stackPreview = document.getElementById('section-icon-preview-stack');
+
+      const renderIconToBox = (box, val) => {
+        if (!box) return;
+        if (val && val.startsWith('fa-')) {
+          box.innerHTML = `<i class="${val}"></i>`;
+        } else if (val && val.includes('<svg')) {
+          box.innerHTML = val;
+        } else {
+          box.innerHTML = `<i class="fa-solid fa-icons"></i>`;
+        }
+      };
+
+      renderIconToBox(expPreview, siteData.section_icons.experience || 'fa-solid fa-briefcase');
+      renderIconToBox(projPreview, siteData.section_icons.projects || 'fa-solid fa-folder-open');
+      renderIconToBox(stackPreview, siteData.section_icons.stack || 'fa-solid fa-layer-group');
+    }
+
+    // Open Section Icon Editor Modal
+    window.openSectionIconEditor = function(sectionKey) {
+      iconModalTarget = { type: 'section', idx: -1, sectionKey: sectionKey };
+      const sectionNames = {
+        experience: 'Seksi Pengalaman Kerja',
+        projects: 'Seksi Karya & Proyek',
+        stack: 'Seksi Tech Stack'
+      };
+      document.getElementById('icon-modal-tech-name').textContent = sectionNames[sectionKey] || 'Seksi';
+
+      if (!siteData.section_icons) {
+        siteData.section_icons = {
+          experience: 'fa-solid fa-briefcase',
+          projects: 'fa-solid fa-folder-open',
+          stack: 'fa-solid fa-layer-group'
+        };
+      }
+
+      const currentVal = siteData.section_icons[sectionKey] || 'fa-solid fa-briefcase';
+      if (currentVal.startsWith('fa-')) {
+        currentSelectedIconType = 'fa';
+        currentSelectedIconVal = currentVal;
+        modalTabFaBtn.click();
+      } else {
+        currentSelectedIconType = 'svg';
+        currentSelectedIconVal = currentVal;
+        modalTabSvgBtn.click();
+      }
+
+      document.getElementById('custom-fa-class-input').value = currentSelectedIconType === 'fa' ? currentSelectedIconVal : '';
+      document.getElementById('icon-modal-svg-code').value = currentSelectedIconType === 'svg' ? currentSelectedIconVal : '';
+      document.getElementById('fa-search-input').value = '';
+
+      renderFontAwesomeGrid();
+      updateIconModalPreview();
+
+      document.getElementById('icon-modal').classList.add('open');
+    };
+
+    // Open Icon Editor Modal
+    window.openIconEditor = function(idx) {
+      iconModalTarget = { type: 'tech', idx: idx, sectionKey: '' };
+      editingTechIndex = idx;
+      const tech = siteData.tech_stack[idx];
+      document.getElementById('icon-modal-tech-name').textContent = tech.name || 'Teknologi';
+
+      // Check current icon
+      const faClass = tech.icon_class || (tech.custom_svg && tech.custom_svg.startsWith('fa-') ? tech.custom_svg : '');
+      if (faClass) {
+        currentSelectedIconType = 'fa';
+        currentSelectedIconVal = faClass;
+        modalTabFaBtn.click();
+      } else if (tech.custom_svg && tech.custom_svg.includes('<svg')) {
+        currentSelectedIconType = 'svg';
+        currentSelectedIconVal = tech.custom_svg;
+        modalTabSvgBtn.click();
+      } else if (defaultTechSVGs[tech.name]) {
+        currentSelectedIconType = 'svg';
+        currentSelectedIconVal = defaultTechSVGs[tech.name];
+        modalTabSvgBtn.click();
+      } else {
+        currentSelectedIconType = 'fa';
+        currentSelectedIconVal = 'fa-solid fa-code';
+        modalTabFaBtn.click();
+      }
+
+      document.getElementById('custom-fa-class-input').value = currentSelectedIconType === 'fa' ? currentSelectedIconVal : '';
+      document.getElementById('icon-modal-svg-code').value = currentSelectedIconType === 'svg' ? currentSelectedIconVal : '';
+      document.getElementById('fa-search-input').value = '';
+
+      renderFontAwesomeGrid();
+      updateIconModalPreview();
+
+      document.getElementById('icon-modal').classList.add('open');
+    };
+
+    document.getElementById('save-icon-btn').addEventListener('click', () => {
+      if (iconModalTarget.type === 'tech' && iconModalTarget.idx >= 0 && siteData.tech_stack[iconModalTarget.idx]) {
+        const tech = siteData.tech_stack[iconModalTarget.idx];
+        if (currentSelectedIconType === 'fa') {
+          tech.icon_class = currentSelectedIconVal;
+          tech.custom_svg = currentSelectedIconVal;
+        } else {
+          tech.custom_svg = currentSelectedIconVal;
+          delete tech.icon_class;
+        }
+        renderTechStackCards();
+        closeIconModal();
+        showToast('Ikon teknologi berhasil diterapkan');
+      } else if (iconModalTarget.type === 'social' && iconModalTarget.idx >= 0 && siteData.social_links[iconModalTarget.idx]) {
+        siteData.social_links[iconModalTarget.idx].icon = currentSelectedIconVal;
+        renderSocialLinksList();
+        closeIconModal();
+        showToast('Ikon media sosial berhasil diterapkan');
+      } else if (iconModalTarget.type === 'section' && iconModalTarget.sectionKey) {
+        if (!siteData.section_icons) siteData.section_icons = {};
+        siteData.section_icons[iconModalTarget.sectionKey] = currentSelectedIconVal;
+        renderSectionIconPreviews();
+        closeIconModal();
+        showToast('Ikon seksi berhasil diterapkan');
+      }
+    });
+
+    function closeIconModal() {
+      document.getElementById('icon-modal').classList.remove('open');
+      editingTechIndex = -1;
+      iconModalTarget = { type: 'tech', idx: -1, sectionKey: '' };
+    }
+
+    // Visual Rich Text Editor Helpers
+    function getCleanBioHtml(id) {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      let html = el.innerHTML.trim();
+      if (!html || html === '<br>' || html === '<div><br></div>') return '';
+
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+
+      temp.querySelectorAll('b, strong, [style*="bold"], [style*="700"]').forEach(st => {
+        const strong = document.createElement('strong');
+        strong.className = 'text-fg whitespace-nowrap';
+        strong.innerHTML = st.innerHTML;
+        st.replaceWith(strong);
+      });
+
+      temp.querySelectorAll('i, em, [style*="italic"]').forEach(it => {
+        const em = document.createElement('em');
+        em.innerHTML = it.innerHTML;
+        it.replaceWith(em);
+      });
+
+      let result = '';
+      temp.childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          result += node.textContent;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const tag = node.tagName.toLowerCase();
+          if (tag === 'div' || tag === 'p') {
+            result += ' ' + node.innerHTML + ' ';
+          } else {
+            result += node.outerHTML;
+          }
+        }
+      });
+
+      return result.replace(/\s+/g, ' ').trim();
+    }
+
+    window.formatBioText = function(editorId, command) {
+      const editor = document.getElementById(editorId);
+      if (!editor) return;
+      editor.focus();
+      document.execCommand(command, false, null);
+    };
+
+    document.getElementById('close-icon-modal-btn').addEventListener('click', closeIconModal);
+    document.getElementById('icon-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'icon-modal') closeIconModal();
+    });
+
+    // Render Media Gallery
+    function renderMediaGallery() {
+      const gallery = document.getElementById('media-gallery-grid');
+      const modalList = document.getElementById('modal-gallery-list');
+      gallery.innerHTML = '';
+      modalList.innerHTML = '';
+
+      availableMedia.forEach(path => {
+        // Tab gallery
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'cms-media-card';
+        card.innerHTML = `
+          <div class="cms-media-thumb">
+            <img src="/${path}" alt="${path}" loading="lazy" />
+          </div>
+          <span style="font-size: 0.65rem; color: var(--muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%; text-align: center;">${path.replace('assets/', '')}</span>
+        `;
+        card.addEventListener('click', () => {
+          navigator.clipboard.writeText(path);
+          showToast('Jalur berkas disalin: ' + path);
+        });
+        gallery.appendChild(card);
+
+        // Modal list item
+        const mBtn = document.createElement('button');
+        mBtn.type = 'button';
+        mBtn.className = 'cms-media-card';
+        mBtn.innerHTML = `
+          <div class="cms-media-thumb">
+            <img src="/${path}" alt="${path}" loading="lazy" />
+          </div>
+          <span style="font-size: 0.65rem; color: var(--muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%; text-align: center;">${path.replace('assets/', '')}</span>
+        `;
+        mBtn.addEventListener('click', () => {
+          if (targetImageFieldCallback) {
+            targetImageFieldCallback(path);
+          }
+          closeMediaPicker();
+        });
+        modalList.appendChild(mBtn);
+      });
+    }
+
+    // Media Picker Modal
+    window.openMediaPickerFor = function(inputId, callback) {
+      targetImageFieldCallback = (path) => {
+        const input = document.getElementById(inputId);
+        if (input) input.value = path;
+        if (callback) callback(path);
+      };
+      document.getElementById('media-modal').classList.add('open');
+    };
+
+    function closeMediaPicker() {
+      document.getElementById('media-modal').classList.remove('open');
+      targetImageFieldCallback = null;
+    }
+
+    document.getElementById('close-modal-btn').addEventListener('click', closeMediaPicker);
+    document.getElementById('media-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'media-modal') closeMediaPicker();
+    });
+
+    document.getElementById('change-avatar-btn').addEventListener('click', () => {
+      openMediaPickerFor('field-avatar-path', (path) => {
+        siteData.avatar = path;
+        document.getElementById('avatar-preview').src = '/' + path;
+        document.getElementById('dock-avatar').src = '/' + path;
+      });
+    });
+
+    document.getElementById('change-favicon-btn').addEventListener('click', () => {
+      openMediaPickerFor('field-favicon-path', (path) => {
+        siteData.favicon = path;
+        document.getElementById('favicon-preview').src = '/' + path;
+      });
+    });
+
+    // Upload Media
+    document.getElementById('upload-media-btn').addEventListener('click', () => {
+      document.getElementById('media-file-input').click();
+    });
+
+    document.getElementById('media-file-input').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          if (!availableMedia.includes(data.path)) {
+            availableMedia.unshift(data.path);
+          }
+          renderMediaGallery();
+          showToast('Gambar berhasil diunggah: ' + data.path);
+        } else {
+          showToast(data.message || 'Gagal mengunggah gambar');
+        }
+      } catch (err) {
+        showToast('Terjadi kesalahan saat mengunggah');
+      }
+    });
+
+    // Change Password Form
+    document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = document.getElementById('new-username').value.trim();
+      const pass = document.getElementById('new-password').value;
+
+      if (!user && !pass) {
+        showToast('Isi nama pengguna atau kata sandi baru');
+        return;
+      }
+
+      const btn = document.getElementById('save-password-btn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>Menyimpan...</span>';
+
+      try {
+        const res = await fetch('/api/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: user, password: pass })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(data.message || 'Kredensial login berhasil diperbarui');
+          document.getElementById('new-password').value = '';
+          if (data.username) {
+            document.getElementById('new-username').value = data.username;
+          }
+        } else {
+          showToast(data.message || 'Gagal mengubah kata sandi');
+        }
+      } catch (err) {
+        showToast('Gagal menghubungi server');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
+
+    // Save All Changes
+    document.getElementById('save-all-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('save-all-btn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>Menyimpan...</span>';
+
+      // Collect data
+      siteData.name = document.getElementById('field-name').value.trim();
+      siteData.role = document.getElementById('field-role').value.trim();
+      siteData.email = document.getElementById('field-email').value.trim();
+      siteData.footer = document.getElementById('field-footer').value.trim();
+
+      siteData.bio_paragraphs = [
+        getCleanBioHtml('bio-editor-1'),
+        getCleanBioHtml('bio-editor-2'),
+        getCleanBioHtml('bio-editor-3')
+      ].filter(Boolean);
+
+      if (siteData.social_links && Array.isArray(siteData.social_links)) {
+        const gh = siteData.social_links.find(s => (s.platform || '').toLowerCase() === 'github');
+        siteData.github_url = gh ? gh.url : '';
+        const li = siteData.social_links.find(s => (s.platform || '').toLowerCase() === 'linkedin');
+        siteData.linkedin_url = li ? li.url : '';
+        const x = siteData.social_links.find(s => {
+          const p = (s.platform || '').toLowerCase();
+          return p === 'x' || p.includes('twitter');
+        });
+        siteData.x_url = x ? x.url : '';
+      }
+
+      try {
+        const res = await fetch('/api/content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(siteData)
+        });
+        const result = await res.json();
+        if (res.ok && result.success) {
+          showToast('Seluruh perubahan berhasil disimpan');
+          if (siteData.name) document.getElementById('dock-title').textContent = siteData.name;
+        } else {
+          showToast(result.message || 'Gagal menyimpan perubahan');
+        }
+      } catch (err) {
+        showToast('Gagal menghubungi server untuk menyimpan');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      try {
+        await fetch('/api/logout', { method: 'POST' });
+        window.location.href = '/login';
+      } catch (err) {
+        window.location.href = '/login';
+      }
+    });
+
+    // Run on startup
+    loadContent();
+  </script>
+</body>
+</html>
